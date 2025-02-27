@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RODOOS</title>
+    <link rel="shortcut icon" href="/title.png" type="image/x-icon">
+    <link rel="icon" href="/title.png" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            height: 100vh;
+            background-attachment: fixed;
+            background-image: url('abstract-grey-and-gold-background-beauty-poster-with-dynamic-technology-network-illustration-vector.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #imageContainer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .image-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff00;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .image-caption {
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+            max-height: 150px;
+            overflow: auto;
+        }
+
+        .navbar {
+            height: 80px;
+            position: fixed;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #333333;
+            padding: 10px 20px;
+            top: 0;
+            z-index: 1000;
+            width: 98%;
+        }
+
+        .navbar:hover {
+            background-color:  #333333c1;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style-type: none;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            #imageContainer {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .hidden-buttons {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .nav-links li:hover .hidden-buttons {
+            display: block;
+            background-color: #333;
+            color: #EBCB44;
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 0s;
+            opacity: 1;
+        }
+
+        .hidden-buttons button {
+            background-color: #333;
+            color: #EBCB44;
+            border: 1px solid #EBCB44;
+            padding: 10px 15px;
+            margin: 5px 0;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .hidden-buttons button:hover {
+            background-color: #EBCB44;
+            color: #333;
+            transform: scale(1.05);
+        }
+
+        .social-media-panel {
+            width: 100%;
+            background-color: #333;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .social-media-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+
+        .social-icon {
+            font-size: 40px;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Password and email popup */
+        #passwordPage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            z-index: 1001;
+        }
+
+        #passwordPage input, #passwordPage button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #passwordPage button {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        #passwordPage button:hover {
+            background-color: #EBCB44;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="/Rodoos.png" alt="RODOOS Logo" style="max-height: 50px;">
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="https://rodoos.az/photos" class="next-button" style="color: rgb(235, 188, 68); text-decoration: none;">Əsas səyfə</a></li>
+            <li><a href="#about" style="color: rgb(235, 188, 68); text-decoration: none;">Biz kimik?</a></li>
+            <li><a href="https://rodoos.az/expert" style="color: rgb(235, 188, 68); text-decoration: none;">Ekspertlərimiz</a></li>
+            <li><a href="https://rodoos.az/about" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
+            <li><a href="#" class="next-button" style="text-decoration: none; color: #545252;" onclick="showPasswordPage()">LOGIN ADMIN</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </nav>
+
+    <!-- Password and Email Popup -->
+    <div id="passwordPage">
+        <input type="password" id="password" placeholder="Enter password">
+        <input type="email" id="email" placeholder="Enter email ()">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <div id="imageContainer">
+        <% photos.forEach(photo => { %>
+            <div class="image-item">
+                <img src="data:image/jpeg;base64,<%= photo.image %>" alt="Fotoğraf" width="300">
+                <p class="image-caption"><%= photo.description %></p>
+            </div>
+        <% }) %>
+    </div>
+
+    <div class="social-media-panel">
+        <div class="social-media-links">
+            <a href="https://www.instagram.com/rodoosllc?igsh=Y3p4dXg2cGVkdHM5" target="_blank" class="social-link">
+                <i class="fab fa-instagram social-icon"></i> Instagram
+            </a>
+            <a href="http://Www.Linkedin.com/company/rodoosllc" target="_blank" class="social-link">
+                <i class="fab fa-linkedin social-icon"></i> LinkedIn
+            </a>
+            <a href="https://wa.me/+994702712500" target="_blank" class="social-link">
+                <i class="fab fa-whatsapp social-icon"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function showPasswordPage() {
+            document.getElementById('passwordPage').style.display = 'block';
+        }
+
+        function checkPassword() {
+            const enteredPassword = document.getElementById('password').value;
+            const enteredEmail = document.getElementById('email').value;
+            const correctPassword = '12345';
+            const correctEmail = 'rodoosllc@gmail.com';
+
+            if (enteredPassword === correctPassword && enteredEmail === correctEmail) {
+                window.location.href = "https://rodoos.az/upload";
+            } else {
+                alert('Incorrect password or email');
+                document.getElementById('password').value = '';
+                document.getElementById('email').value = '';
+            }
+        }
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

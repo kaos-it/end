@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hakkında Sayfası</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-image: url('/images/background.jpg'); /* Public klasöründen çağır */
+      color: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      animation: fadeInDown 1.2s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .icons {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .icon-button {
+      font-size: 3rem;
+      background: #f9fafb;
+      color: #1e293b;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .icon-button:hover {
+      transform: scale(1.2);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .icon-button:focus {
+      outline: 2px solid #f9fafb;
+      outline-offset: 3px;
+    }
+
+    /* Linklerin altındaki mavi çizgiyi kaldırma */
+    a {
+      text-decoration: none;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+  <h1>Hakkımızda</h1>
+  <p>
+    Biz, yaratıcı çözümler sunan, teknoloji ve yeniliğe önem veren bir ekibiz. 
+    Misyonumuz, kullanıcılarımızın hayatlarını kolaylaştırmak ve değer katmaktır.
+  </p>
+
+  <div class="icons">
+    <% let socialLinks = [
+      { url: "https://wa.me/0514132500", icon: "fab fa-whatsapp", label: "WhatsApp" },
+      { url: "https://www.instagram.com/rafet.shiraliyev?igsh=MThvMDVmZHpkMXNwbQ==", icon: "fab fa-instagram", label: "Instagram" },
+      { url: "https://www.tiktok.com/@rafetshiraliyev?_t=ZS-8tOqc4YM2My&_r=1", icon: "fab fa-tiktok", label: "TikTok" },
+      { url: "https://www.facebook.com/share/15a8kuwdZi/?mibextid=wwXIfr", icon: "fab fa-facebook", label: "Facebook" }
+    ]; %>
+
+    <% socialLinks.forEach(link => { %>
+      <a href="<%= link.url %>" target="_blank" aria-label="<%= link.label %>">
+        <button class="icon-button">
+          <i class="<%= link.icon %>"></i>
+        </button>
+      </a>
+    <% }); %>
+  </div>
+</body>
+</html>

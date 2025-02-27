@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uzmanlar</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 50%; margin: auto; text-align: center; }
+        .expert-form { margin-bottom: 20px; }
+        .expert-list { display: flex; flex-wrap: wrap; justify-content: center; }
+        .expert-card { border: 1px solid #ddd; padding: 10px; margin: 10px; width: 250px; text-align: center; }
+        img { width: 100%; height: auto; }
+        button { background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Uzman Ekle</h2>
+        <form class="expert-form" action="/expert-upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="photo" required> <br><br>
+            <textarea name="description" placeholder="Uzman haqqında məlumat..." required></textarea> <br><br>
+            <button type="submit">Yüklə</button>
+        </form>
+
+        <h2>Mövcud Uzmanlar</h2>
+        <div class="expert-list">
+            <% experts.forEach(expert => { %>
+                <div class="expert-card">
+                    <img src="data:image/jpeg;base64,<%= expert.photo %>" alt="Uzman Fotoğrafı">
+                    <p><%= expert.description %></p>
+                    <form action="/delete-expert/<%= expert.id %>" method="POST">
+                        <button type="submit">Sil</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>

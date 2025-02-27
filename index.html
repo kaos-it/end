@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RODOSS</title>
+    <link rel="icon" href="title.png" type="image/png">
+  </head>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #1e293b;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: pulsate 20s infinite ease-in-out;
+    }
+
+    @keyframes pulsate {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .next-button {
+      background: linear-gradient(90deg, #ffd700, #ffcc00, #ffd700);
+      color: #1e293b;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none; /* Alt çizgi kaldırıldı */
+      transition: transform 0.3s ease, background 0.3s ease;
+      display: inline-block;
+    }
+
+    .next-button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(90deg, #ffcc00, #ffd700, #ffcc00);
+    }
+
+    .next-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-30deg);
+      transition: left 0.5s ease;
+    }
+
+   /* Hover efekti ile gizli butonlar */
+.nav-links li:hover .hidden-buttons {
+    display: block;
+    background-color: #333; /* Siyah arka plan */
+    color: #EBCB44; /* Altın sarısı metin rengi */
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 0s; /* Animasyonun hemen başlamasını sağla */
+    opacity: 1;
+}
+
+/* Gizli butonlar için yeni stil */
+.hidden-buttons button {
+    background-color: #333; /* Siyah arka plan */
+    color: #EBCB44; /* Altın sarısı metin rengi */
+    border: 1px solid #EBCB44; /* Altın sarısı kenarlık */
+    padding: 10px 15px;
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Gizli butonlar üzerine gelince oluşan hover efekti */
+.hidden-buttons button:hover {
+    background-color: #EBCB44; /* Hoverda altın sarısı arka plan */
+    color: #333; /* Hoverda siyah metin rengi */
+    transform: scale(1.05); /* Hoverda hafif büyüme efekti */
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>Peşəkarlardan əldə edəcəyiniz məlumatlar sizin fəaliyyətizin daha<br> səmərəli təşkilini və sistemli icrasını özündə əks etdirəcəkdir</h1>
+
+  <div class="button-container">
+    <!-- Login sayfası linki -->
+    <a href="https://rodoos.az/photos" class="next-button">Next</a>
+
+
+
+  
+  </div>
+</body>
+</html>
+
