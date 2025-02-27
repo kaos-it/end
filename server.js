@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views')); // views klasörünü belirtiyo
 
 // CORS ayarları
 app.use(cors({
-  origin: 'http://localhost:5500', // Frontend domainini burada belirt
+  origin: 'https://rodoos.az', // Frontend domainini burada belirt
   methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
