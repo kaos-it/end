@@ -6,7 +6,7 @@ const cors = require('cors');
 const methodOverride = require('method-override');
 
 const app = express();
-const port = 3000;
+const port = 80; // veya 443
 
 // PostgreSQL bağlantısı
 const client = new Client({
@@ -144,7 +144,8 @@ app.get('/photos', (req, res) => {
   });
 });
 
+
 app.listen(port, () => {
   console.log(`Sunucu ${port} portunda çalışıyor...`);
-  console.log(`👉 Ana sayfayı aç: http://localhost:${port}`);
+  console.log(`👉 Ana sayfayı aç: http://rodoos.az`);
 });
