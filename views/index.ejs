@@ -77,52 +77,18 @@
       transform: skewX(-30deg);
       transition: left 0.5s ease;
     }
-
-   /* Hover efekti ile gizli butonlar */
-.nav-links li:hover .hidden-buttons {
-    display: block;
-    background-color: #333; /* Siyah arka plan */
-    color: #EBCB44; /* Altın sarısı metin rengi */
-    animation: fadeIn 2s ease forwards;
-    animation-delay: 0s; /* Animasyonun hemen başlamasını sağla */
-    opacity: 1;
-}
-
-/* Gizli butonlar için yeni stil */
-.hidden-buttons button {
-    background-color: #333; /* Siyah arka plan */
-    color: #EBCB44; /* Altın sarısı metin rengi */
-    border: 1px solid #EBCB44; /* Altın sarısı kenarlık */
-    padding: 10px 15px;
-    margin: 5px 0;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-/* Gizli butonlar üzerine gelince oluşan hover efekti */
-.hidden-buttons button:hover {
-    background-color: #EBCB44; /* Hoverda altın sarısı arka plan */
-    color: #333; /* Hoverda siyah metin rengi */
-    transform: scale(1.05); /* Hoverda hafif büyüme efekti */
-}
-
   </style>
-</head>
-<body>
+  <body>
+    <h1>Peşəkarlardan əldə edəcəyiniz məlumatlar sizin fəaliyyətizin daha<br> səmərəli təşkilini və sistemli icrasını özündə əks etdirəcəkdir</h1>
 
-  <h1>Peşəkarlardan əldə edəcəyiniz məlumatlar sizin fəaliyyətizin daha<br> səmərəli təşkilini və sistemli icrasını özündə əks etdirəcəkdir</h1>
+    <div class="button-container">
+      <!-- Next butonuna tıklandığında /photos sayfasına yönlendirme yapılacak -->
+      
 
-  <div class="button-container">
-    <!-- Login sayfası linki -->
-    <a href="https://rodoos.az/photos" class="next-button">Next</a>
+      <a href="/photos" class="next-button">Next</a>
 
 
 
-  
-  </div>
-</body>
+    </div>
+  </body>
 </html>
-

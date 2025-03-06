@@ -3,7 +3,7 @@ const { Client } = require('pg');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
-const methodOverride = require('method-override'); // method-override ekliyoruz
+const methodOverride = require('method-override');
 
 const app = express();
 const port = 3000;
@@ -17,6 +17,7 @@ const client = new Client({
   port: 5432,
 });
 
+// PostgreSQL bağlantısı
 client.connect()
   .then(() => console.log('PostgreSQL bağlantısı başarılı!'))
   .catch(err => console.error('Bağlantı hatası:', err.stack));
@@ -26,8 +27,20 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); // views klasörünü belirtiyoruz
 
 // CORS ayarları
+const allowedOrigins = [
+  'https://rodoos.az', 
+  'http://localhost:3000', 
+  'http://127.0.0.1:3000'
+];
+
 app.use(cors({
-  origin: 'https://rodoos.az', // Frontend domainini burada belirt
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy does not allow this origin!'));
+    }
+  },
   methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
@@ -102,18 +115,18 @@ app.delete('/delete-photo/:id', (req, res) => {
   });
 });
 
-// Silme formunun POST metoduyla çalışabilmesi için
-app.post('/delete-photo/:id', (req, res) => {
-  const photoId = req.params.id;
+// Ana sayfa yönlendirmesi
+app.get('/', (req, res) => {
+  res.render('index'); // index.ejs dosyasını render eder
+});
 
-  const query = 'DELETE FROM photos WHERE id = $1';
-  client.query(query, [photoId], (err) => {
-    if (err) {
-      console.error('Silme hatası:', err);
-      return res.status(500).json({ success: false, message: 'Fotoğraf silinemedi' });
-    }
-    res.redirect('/upload'); // Silme işleminden sonra yükleme sayfasına yönlendir
-  });
+// Diğer sayfa yönlendirmeleri
+app.get('/expert', (req, res) => {
+  res.render('expert');
+});
+
+app.get('/about', (req, res) => {
+  res.render('about');
 });
 
 // Fotoğrafları listeleme
@@ -130,39 +143,8 @@ app.get('/photos', (req, res) => {
     res.render('photos', { photos });
   });
 });
-app.use(express.static('public'));
-
-app.get('/expert', (req, res) => {
-  res.render('expert');
-});
-app.get('/about', (req, res) => {
-  res.render('about');
-});
-app.get('/hakkimizda', (req, res) => {
-  res.render('hakkimizda');
-});
-app.get('/deyerlerimiz', (req, res) => {
-  res.render('deyerlerimiz');
-});
-app.get('/misya', (req, res) => {
-  res.render('misya');
-});
-app.get('/telim', (req, res) => {
-  res.render('telim');
-});
-app.get('/meslehet', (req, res) => {
-  res.render('meslehet');
-});
-app.get('/arasdirma', (req, res) => {
-  res.render('arasdirma');
-});
-app.get('/secenler', (req, res) => {
-  res.render('secenler');
-});
-
-
-
 
 app.listen(port, () => {
   console.log(`Sunucu ${port} portunda çalışıyor...`);
+  console.log(`👉 Ana sayfayı aç: http://localhost:${port}`);
 });

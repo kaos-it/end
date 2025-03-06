@@ -222,10 +222,10 @@
         </a>
         
         <ul class="nav-links">
-            <li><a href="https://rodoos.az/photos" class="next-button" style="color: rgb(235, 188, 68); text-decoration: none;">Əsas səyfə</a></li>
+            <li><a href="/photos" class="next-button" style="color: rgb(235, 188, 68); text-decoration: none;">Əsas səyfə</a></li>
             <li><a href="#about" style="color: rgb(235, 188, 68); text-decoration: none;">Biz kimik?</a></li>
-            <li><a href="https://rodoos.az/expert" style="color: rgb(235, 188, 68); text-decoration: none;">Ekspertlərimiz</a></li>
-            <li><a href="https://rodoos.az/about" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
+            <li><a href="/expert" style="color: rgb(235, 188, 68); text-decoration: none;">Ekspertlərimiz</a></li>
+            <li><a href="/about" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
             <li><a href="#" class="next-button" style="text-decoration: none; color: #545252;" onclick="showPasswordPage()">LOGIN ADMIN</a></li>
         </ul>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -273,7 +273,7 @@
             const correctEmail = 'rodoosllc@gmail.com';
 
             if (enteredPassword === correctPassword && enteredEmail === correctEmail) {
-                window.location.href = "https://rodoos.az/upload";
+                window.location.href = "/upload";
             } else {
                 alert('Incorrect password or email');
                 document.getElementById('password').value = '';
