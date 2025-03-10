@@ -17,6 +17,7 @@ const client = new Client({
   port: 5432,
 });
 
+
 // PostgreSQL bağlantısı
 client.connect()
   .then(() => console.log('PostgreSQL bağlantısı başarılı!'))
@@ -101,18 +102,32 @@ app.get('/upload', (req, res) => {
   });
 });
 
-// Fotoğraf silme işlemi
-app.delete('/delete-photo/:id', (req, res) => {
-  const photoId = req.params.id;
-
-  const query = 'DELETE FROM photos WHERE id = $1';
-  client.query(query, [photoId], (err) => {
-    if (err) {
-      console.error('Silme hatası:', err);
-      return res.status(500).json({ success: false, message: 'Fotoğraf silinemedi' });
+// Fotoğraf silme işlemi - DELETE metodu ile
+app.delete('/delete-photo/:id', async (req, res) => {
+  try {
+    const result = await client.query('DELETE FROM photos WHERE id = $1', [req.params.id]);
+    if (result.rowCount > 0) {
+      res.json({ success: true, message: 'Fotoğraf başarıyla silindi!' });
+    } else {
+      res.status(404).json({ success: false, message: 'Fotoğraf bulunamadı!' });
     }
-    res.json({ success: true, message: 'Fotoğraf başarıyla silindi!' });
-  });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Fotoğraf silinemedi.' });
+  }
+});
+
+// Fotoğraf silme işlemi - POST ile method override
+app.post('/delete-photo/:id', async (req, res) => {
+  try {
+    const result = await client.query('DELETE FROM photos WHERE id = $1', [req.params.id]);
+    if (result.rowCount > 0) {
+      res.redirect('/upload'); // Silme sonrası sayfaya yönlendirme
+    } else {
+      res.status(404).send('Fotoğraf bulunamadı!');
+    }
+  } catch (err) {
+    res.status(500).send('Fotoğraf silinemedi.');
+  }
 });
 
 // Ana sayfa yönlendirmesi

@@ -13,7 +13,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 100px;
+          margin-top: 0;
             height: 100vh;
             background-attachment: fixed;
             background-image: url('abstract-grey-and-gold-background-beauty-poster-with-dynamic-technology-network-illustration-vector.jpg');
@@ -21,50 +21,119 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+        .top-bar {
+    
+    top: 0;
+    left: 0;
+    width: 98%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000;
+    z-index: 1001;
+    height: 60px;
+}
 
-        #imageContainer {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 20px;
-        }
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
 
-        .image-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #ffffff00;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform 0.3s, background-color 0.3s;
+}
 
-        .image-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+.social-icons i {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
 
-        .image-caption {
-            margin-top: 10px;
-            text-align: center;
-            color: #333;
-            max-height: 150px;
-            overflow: auto;
-        }
+.social-icons a:hover {
+    transform: scale(1.1);
+    background-color: rgb(235, 188, 68);
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: rgb(235, 188, 68);
+}
+
+.info a {
+    color: rgb(235, 188, 68);
+    text-decoration: none;
+}
+
+
+
+
+#imageContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.image-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff00;
+    
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-item img {
+    width: 80%; /* Border'ı %90 kaplaması için genişliği ayarlıyoruz */
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover; /* Fotoğrafın tüm alanı kaplamasını sağlıyoruz */
+}
+
+.image-caption {
+    margin-top: 10px;
+    text-align: center;
+    color: #333;
+    max-height: 150px;
+    overflow: auto;
+}
+
+@media (max-width: 768px) {
+    #imageContainer {
+        grid-template-columns: 1fr; /* Mobilde her fotoğraf 1 sütun olacak */
+    }
+
+    .image-item {
+        margin: 10px 0;
+    }
+}
+
+
 
         .navbar {
-            height: 80px;
-            position: fixed;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #333333;
-            padding: 10px 20px;
-            top: 0;
-            z-index: 1000;
-            width: 98%;
+        position: sticky; /* Navbar'ı sayfa kaydırıldıkça sabit tutar */
+        top: 0; /* Sayfa en üstüne yerleştirir */
+        height: 90px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #cecece;
+        padding: 10px 20px;
+        z-index: 1000;
+        width: 98%;
+
         }
 
         .navbar:hover {
@@ -73,7 +142,7 @@
 
         .navbar .logo {
             color: white;
-            font-size: 24px;
+            font-size: 30px;
             text-decoration: none;
             font-weight: bold;
         }
@@ -155,8 +224,9 @@
             background-color: #333;
             padding: 20px 0;
             text-align: center;
-            position: relative;
-            margin-top: 20px;
+            margin-bottom: 0;
+            left: 0;
+            bottom: 0;
         }
 
         .social-media-links {
@@ -211,25 +281,242 @@
         #passwordPage button:hover {
             background-color: #EBCB44;
         }
+         /* Modal ve İçeriği */
+.modal {
+    display: none;  /* Başlangıçta gizli */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Karartma */
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+/* Modal İçeriği */
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+/* Kapatma Butonu */
+.exit-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.exit-button:hover {
+    background-color: #e53935;
+}
+
+/* Kapatma ikonunun konumu */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #000;
+}
+/* Slider container */
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;  /* Ekran genişliğine göre uyum sağlar */
+    margin: auto;
+    overflow: hidden; /* Fotoğraf dışarı taşmasın */
+}
+
+/* Slider image */
+#slider {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.5s ease-in-out; /* Animasyon için geçiş efekti */
+    object-fit: cover; /* Fotoğrafın orantılı bir şekilde doldurulmasını sağlar */
+}
+
+/* Next/Previous buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .prev, .next {
+        font-size: 1.5rem; /* Buton boyutunu küçült */
+        padding: 8px;
+    }
+    
+    #slider {
+        width: 100%;
+        height: auto;  /* Fotoğraf genişliği ekran genişliğine göre uyum sağlar */
+    }
+}
+
+@media (max-width: 480px) {
+    .prev, .next {
+        font-size: 1.2rem; /* Buton boyutunu daha da küçült */
+        padding: 5px;
+    }
+
+    #slider {
+        width: 100%;  /* Fotoğrafın genişliği ekranın tamamını kaplasın */
+        height: auto;  /* Yükseklik orantılı olarak ayarlandığı için genişlik değiştikçe yükseklik de değişir */
+    }
+}
+
+        .menu {
+    display: none; /* Menü başlangıçta gizli */
+    background-color: #333;
+    color: #000000;
+    padding: 10px;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu ul li {
+    margin: 10px 0;
+}
+
+.menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+        
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="/Rodoos.png" alt="RODOOS Logo" style="max-height: 50px;">
-        </a>
+    <div class="top-bar">
+        <!-- Sosyal Medya İkonları -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/+994702712500" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
         
-        <ul class="nav-links">
-            <li><a href="/photos" class="next-button" style="color: rgb(235, 188, 68); text-decoration: none;">Əsas səyfə</a></li>
-            <li><a href="#about" style="color: rgb(235, 188, 68); text-decoration: none;">Biz kimik?</a></li>
-            <li><a href="/expert" style="color: rgb(235, 188, 68); text-decoration: none;">Ekspertlərimiz</a></li>
-            <li><a href="/about" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
+
+        <!-- İletişim Bilgileri -->
+        <div class="info">
+            <a href="https://rodoos.az/">ÖDƏNİŞSİZ KONSULTASİYA ➜</a>
+            <span>📱 + (994-70) 271-25-00</span>
+            <span>📞 + (994-51) 413-25-00</span>
+            <a href="mailto:info@rodoos.az">✉ info@rodoos.az</a>
+        </div>
+
+        <!-- Dil Seçenekleri -->
+       
+    </div>
+
+
+
+
+
+    
+   <!-- Navbar -->
+   <nav class="navbar">
+    <a href="#" class="logo">
+        <!-- Logo resmini buraya ekliyoruz -->
+        <img src="/Rodoos.png" alt="RODOOS Logo" style="max-height: 50px;">
+    </a>
+    
+    <ul class="nav-links">
+        <li><a href="/photos" class="next-button" style="color: rgb(235, 188, 68); text-decoration: none;">Əsas səyfə</a></li>
+        <li><a href="/kimik" style="color: rgb(235, 188, 68); text-decoration: none;">Biz kimik?</a>
+            <div class="hidden-buttons">
+                <button><a href="haqqımızda.html" style="color: rgb(235, 188, 68); text-decoration: none;">Haqqımzıda</a></button>
+                <button><a href="deyerlerımız.html" style="color: rgb(235, 188, 68); text-decoration: none;">Dəyərlərimiz</a></button>
+                <button><a href="misya.html" style="color: rgb(235, 188, 68); text-decoration: none;">Misiya & Vizyonumuz</a></button>
+            </div>
+        </li>
+        <li><a href="#about" style="color: rgb(235, 188, 68); text-decoration: none;">Xidmətlərimiz</a>
+            <div class="hidden-buttons">
+                <button><a href="telim.html" style="color: rgb(235, 188, 68); text-decoration: none;">Təlim</a></button>
+                <button><a href="/meslehet" style="color: rgb(235, 188, 68); text-decoration: none;">Məsləhət</a></button>
+                <button><a href="araşdırma.html" style="color: rgb(235, 188, 68); text-decoration: none;">Araşdırma</a></button>
+            </div>
+        </li>
+        <li><a href="/photo-uploald" style="color: rgb(235, 188, 68); text-decoration: none;">ADMIN</a></li>
+        <li><a href="contact.html" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi seçənlər</a></li>
+        <li><a href="sosialmedya.html" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
+        <div>
             <li><a href="#" class="next-button" style="text-decoration: none; color: #545252;" onclick="showPasswordPage()">LOGIN ADMIN</a></li>
-        </ul>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    </nav>
+        </div>
+     
+    </ul>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</nav>
+
+
+    <!-- haraketli foto-->
+
+    <div class="slider-container">
+        <button class="prev" onclick="prevPhoto()">❮</button>
+        <img id="slider" src="haraket5.jpg" alt="RODOOS.AZ" >
+        <button class="next" onclick="nextPhoto()">❯</button>
+    </div> 
+    
+<br>
+<br>
+    <div style="display: flex; justify-content: space-around;gap: 0; ">
+        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
+        <div style="width: 300px;background-color: rgb(0, 110, 206) ; height: 4px;"></div>
+        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
+    </div>
+    <center><div><h2 style="color: rgb(235, 188, 68);">Layihələrimiz</h2></div></center>
 
     <!-- Password and Email Popup -->
     <div id="passwordPage">
@@ -246,6 +533,16 @@
             </div>
         <% }) %>
     </div>
+    <div style="display: flex; justify-content: space-around;gap: 0; ">
+        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
+        <div style="width: 500px;background-color: rgb(0, 110, 206) ; height: 4px;"></div>
+        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
+    </div>
+    <center><div><h2 style="color: rgb(235, 188, 68);">Expertlərimiz</h2></div></center>
+
+
+    <div></div>
+   
 
     <div class="social-media-panel">
         <div class="social-media-links">
@@ -260,8 +557,27 @@
             </a>
         </div>
     </div>
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Büyütülmüş Fotoğraf">
+        <button class="exit-button" onclick="closeModal()">Bağla</button>
+    </div>
+
 
     <script>
+    
+
+
+
+            // Sayfa kaydırıldıkça navbar'ın stilini değiştirebiliriz
+    window.onscroll = function() {
+        var navbar = document.querySelector(".navbar");
+        if (window.scrollY > 100) {
+            navbar.style.backgroundColor = "#333";  // Scroll sonrası navbar'ın rengini değiştirebilirsiniz
+        } else {
+            navbar.style.backgroundColor = "#cecece";  // Sayfa başına dönünce eski renge geri döner
+        }
+    };
         function showPasswordPage() {
             document.getElementById('passwordPage').style.display = 'block';
         }
@@ -285,6 +601,73 @@
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('active');
         }
+    
+        // Fotoğrafa tıklanarak modalde büyütülmesi için
+        document.querySelectorAll('.image-item img').forEach(img => {
+            img.addEventListener('click', function() {
+                var modal = document.getElementById('myModal');
+                var modalImg = document.getElementById('modalImage');
+                modal.style.display = "flex";
+                modalImg.src = this.src; // Tıklanan fotoğrafı modalde göster
+            });
+        });
+// Modalı gösterme fonksiyonu
+function showModal() {
+    document.getElementById('modal').style.display = 'flex';
+}
+
+// Modalı kapatma fonksiyonu
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+        // Fotoğrafa tıklanarak modalde büyütülmesi için
+        document.querySelectorAll('.image-item img').forEach(img => {
+            img.addEventListener('click', function() {
+                var modal = document.getElementById('myModal');
+                var modalImg = document.getElementById('modalImage');
+                modal.style.display = "flex";
+                modalImg.src = this.src; // Tıklanan fotoğrafı modalde göster
+            });
+        });
+
+        // Modalı kapatmak için
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+        const photos = [
+            'haraket1.png',  // Fotoğraf yollarını buraya ekleyebilirsin
+            'haraket2.png',
+            'haraket3.png',
+            'haraket4.jpg'
+        ];
+
+        let index = 0;
+        const imgElement = document.getElementById('slider');
+
+        function updatePhoto() {
+            imgElement.style.opacity = 0;
+            setTimeout(() => {
+                imgElement.src = photos[index];
+                imgElement.style.opacity = 1;
+            }, 300);
+        }
+
+        function nextPhoto() {
+            index = (index + 1) % photos.length;
+            updatePhoto();
+        }
+
+        function prevPhoto() {
+            index = (index - 1 + photos.length) % photos.length;
+            updatePhoto();
+        }
+
+        setInterval(nextPhoto, 6000); // Otomatik geçiş
+
+    </script>
+
     </script>
 </body>
 </html>

@@ -117,5 +117,13 @@
       </a>
     <% }); %>
   </div>
+  <div id="imageContainer">
+    <% photos.forEach(photo => { %>
+        <div class="image-item">
+            <img src="data:image/jpeg;base64,<%= photo.image %>" alt="Fotoğraf" width="300">
+            <p class="image-caption"><%= photo.description %></p>
+        </div>
+    <% }) %>
+</div>
 </body>
 </html>

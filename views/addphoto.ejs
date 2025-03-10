@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotoğraf Yükle</title>
+</head>
+<body>
+    <h1>Yeni Fotoğraf Yükle</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="photo" accept="image/*" required>
+        <textarea name="description" placeholder="Fotoğraf açıklaması" required></textarea>
+        <button type="submit">Yükle</button>
+    </form>
+    <a href="/kimik">Geri</a>
+</body>
+</html>

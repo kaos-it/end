@@ -237,7 +237,8 @@
             <p><%= photo.description %></p>
             <!-- Silme butonu için form -->
             <form action="/delete-photo/<%= photo.id %>" method="POST">
-              <button type="submit">Sil</button>
+              <button onclick="deletePhoto(53)">Sil</button>
+
             </form>
           </div>
         <% }) %>
