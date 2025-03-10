@@ -8,7 +8,7 @@ const methodOverride = require('method-override');
 
 
 const app = express();
-const port = 3000; // veya 443
+const port = 80; // HTTP portu olarak 80'i kullanabilirsiniz. (ya da 443, HTTPS için)
 
 // PostgreSQL bağlantısı
 const client = new Client({
@@ -152,5 +152,5 @@ app.get('/about', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Sunucu ${port} portunda çalışıyor...`);
-  console.log(`👉 Ana sayfayı aç: http://localhost:3000`);
+  console.log(`👉 Ana sayfayı aç: http://rodoos.az`);
 });
