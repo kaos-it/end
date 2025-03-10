@@ -227,7 +227,6 @@
       <textarea name="description" placeholder="Açıklama"></textarea>
       <button type="submit">Yüklə</button>
     </form>
-  
     <h2>Yüklənən Fotolar</h2>
     <div class="photo-container">
       <% if (photos && photos.length > 0) { %>
@@ -237,18 +236,17 @@
             <p><%= photo.description %></p>
             <!-- Silme butonu için form -->
             <form action="/delete-photo/<%= photo.id %>" method="POST">
-              <button onclick="deletePhoto(53)">Sil</button>
-
+              <!-- method-override için _method parametresi -->
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit">Sil</button>
             </form>
           </div>
         <% }) %>
       <% } else { %>
         <p>Henüz fotoğraf yüklenmedi.</p>
       <% } %>
-
-
-
-
+    </div>
+    
   </div>
 
 

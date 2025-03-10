@@ -5,8 +5,10 @@ const path = require('path');
 const cors = require('cors');
 const methodOverride = require('method-override');
 
+
+
 const app = express();
-const port = 80; // veya 443
+const port = 3000; // veya 443
 
 // PostgreSQL bağlantısı
 const client = new Client({
@@ -16,7 +18,6 @@ const client = new Client({
   password: '1',
   port: 5432,
 });
-
 
 // PostgreSQL bağlantısı
 client.connect()
@@ -101,7 +102,6 @@ app.get('/upload', (req, res) => {
     res.render('photo-upload', { photos });
   });
 });
-
 // Fotoğraf silme işlemi - DELETE metodu ile
 app.delete('/delete-photo/:id', async (req, res) => {
   try {
@@ -116,23 +116,29 @@ app.delete('/delete-photo/:id', async (req, res) => {
   }
 });
 
-// Fotoğraf silme işlemi - POST ile method override
-app.post('/delete-photo/:id', async (req, res) => {
-  try {
-    const result = await client.query('DELETE FROM photos WHERE id = $1', [req.params.id]);
-    if (result.rowCount > 0) {
-      res.redirect('/upload'); // Silme sonrası sayfaya yönlendirme
-    } else {
-      res.status(404).send('Fotoğraf bulunamadı!');
-    }
-  } catch (err) {
-    res.status(500).send('Fotoğraf silinemedi.');
-  }
+// Ana sayfa yönlendirmesi (photos sayfasına yönlendirme)
+app.get('/', (req, res) => {
+  res.redirect('/photos');  // Ana sayfayı photos sayfasına yönlendiriyoruz
 });
 
-// Ana sayfa yönlendirmesi
-app.get('/', (req, res) => {
-  res.render('index'); // index.ejs dosyasını render eder
+// Fotoğraflar sayfası
+app.get('/photos', async (req, res) => {
+  try {
+    const result = await client.query('SELECT id, image, description FROM photos');
+
+    const photos = result.rows.map(row => ({
+      id: row.id,
+      image: row.image ? Buffer.from(row.image).toString('base64') : null,
+      description: row.description
+    }));
+
+    console.log("✅ Fotoğraflar başarıyla alındı:", photos.length);
+
+    res.render('photos', { photos }); // 📌 EJS'e `photos` değişkenini gönderiyoruz!
+  } catch (err) {
+    console.error("❌ Fotoğraflar alınırken hata oluştu:", err);
+    res.render('photos', { photos: [] }); // 📌 Hata olursa boş dizi gönderiyoruz.
+  }
 });
 
 // Diğer sayfa yönlendirmeleri
@@ -144,23 +150,7 @@ app.get('/about', (req, res) => {
   res.render('about');
 });
 
-// Fotoğrafları listeleme
-app.get('/photos', (req, res) => {
-  client.query('SELECT id, image, description FROM photos', (err, result) => {
-    if (err) return res.status(500).json({ success: false, message: 'Fotoğraflar alınamadı.' });
-
-    const photos = result.rows.map(row => ({
-      id: row.id,
-      image: Buffer.from(row.image).toString('base64'),
-      description: row.description
-    }));
-
-    res.render('photos', { photos });
-  });
-});
-
-
 app.listen(port, () => {
   console.log(`Sunucu ${port} portunda çalışıyor...`);
-  console.log(`👉 Ana sayfayı aç: http://rodoos.az`);
+  console.log(`👉 Ana sayfayı aç: http://localhost:3000`);
 });
