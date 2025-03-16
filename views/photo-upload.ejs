@@ -1,263 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fotoğraf Yükle</title>
-  <style>
-         body {
-            margin: 0;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotoğraf Yükleme</title>
+    <style>
+        body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
-            height: 100vh;
-            background-attachment: fixed;
-            background-image: url('abstract-grey-and-gold-background-beauty-poster-with-dynamic-technology-network-illustration-vector.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* Fotoğrafları 3 sütunda yerleştirmek için CSS */
-        #imageContainer {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 3 sütunlu bir düzen */
-            gap: 20px; /* Hücreler arasındaki boşluk */
-            padding: 20px;
-        }
-
-        .image-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #ffffff00;
-            border: px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            
-        }
-
-        .image-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .image-caption {
-            margin-top: 10px;
-            text-align: center;
-            color: #333;
-            max-height: 150px; /* Maksimum yükseklik 150px */
-            overflow: auto; /* Yükseklik aşıldığında kaydırma çubuğu ekler */
-        }
-
-        /* Navbar container */
-        .navbar {
-            height: 80px;
-            position: fixed;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #333333;
-            padding: 10px 20px;
-            top: 0;
-            z-index: 1000;
-            width: 98%;
-        }
-
-        .navbar:hover {
-            background-color:  #333333c1;
-        }
-
-        .navbar .logo {
-            color: white;
-            font-size: 24px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style-type: none;
-            gap: 15px;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background-color: #333;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                text-decoration: none;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            #imageContainer {
-                grid-template-columns: repeat(2, 1fr); /* Mobil cihazlarda 1 sütun */
-            }
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
         }
 
-        /* Yeni gizli düymələrin stili */
-        .hidden-buttons {
-            display: none;
-            position: absolute;
-            top: 40px;
-            left: 0;
-            background-color: #333;
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        /* Fotoğrafları 3 sütun olarak düzenleyen grid sistemi */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+
+        .photo {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        form {
+            margin-top: 20px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        input[type="file"], input[type="text"] {
+            width: 100%;
             padding: 10px;
-            border-radius: 5px;
-            animation: fadeIn 2s ease forwards;
-            animation-delay: 2s; /* Animasyon başlamadan önce 2 saniye bekle */
-            opacity: 0;
-            transition: opacity 0.5s ease; /* Opaklık geçişi */
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        /* Animasiya */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
         }
-   
-    /* Fotoğrafları 3 sütunda yerleştirmek için CSS */
-    .photo-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 20px;
-    }
 
-    .photo-item {
-      text-align: center;
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-    }
-
-    .photo-item img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-
-    .nav-links li:hover .hidden-buttons {
-            display: block;
-            opacity: 1;
+        button:hover {
+            background-color: #45a049;
         }
-    button {
-      margin-top: 10px;
-      padding: 5px 10px;
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
 
-    button:hover {
-      background-color: #ff0000;
-    }
-  </style>
+        .delete-btn {
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .delete-btn:hover {
+            background: #d43f3a;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+    </style>
 </head>
 <body>
 
-      <!-- Navbar -->
-      <nav class="navbar">
-        <a href="#" class="logo">
-            <!-- Logo resmini buraya ekliyoruz -->
-            <img src="/Rodoos.png" alt="RODOOS Logo" style="max-height: 50px;">
-        </a>
-        
-        <ul class="nav-links">
-            <li><a href="http://localhost:3000/photos" class="next-button" style="color: rgb(235, 188, 68); text-decoration: none;">Əsas səyfə</a></li>
-            <li><a href="#about" style="color: rgb(235, 188, 68); text-decoration: none;">Biz kimik?</a>
-                <div class="hidden-buttons">
-                    <button><a href="haqqımızda.html" style="color: rgb(235, 188, 68); text-decoration: none;">Haqqımzıda</a></button>
-                    <button><a href="deyerlerımız.html" style="color: rgb(235, 188, 68); text-decoration: none;">Dəyərlərimiz</a></button>
-                    <button><a href="misya.html" style="color: rgb(235, 188, 68); text-decoration: none;">Misiya & Vizyonumuz</a></button>
-                </div>
-            </li>
-            <li><a href="#about" style="color: rgb(235, 188, 68); text-decoration: none;">Xidmətlərimiz</a>
-                <div class="hidden-buttons">
-                    <button><a href="telim.html" style="color: rgb(235, 188, 68); text-decoration: none;">Təlim</a></button>
-                    <button><a href="meslehet.html" style="color: rgb(235, 188, 68); text-decoration: none;">Məsləhət</a></button>
-                    <button><a href="araşdırma.html" style="color: rgb(235, 188, 68); text-decoration: none;">Araşdırma</a></button>
-                </div>
-            </li>
-            <li><a href="Expert.html" style="color: rgb(235, 188, 68); text-decoration: none;">Ekspertlərimiz</a></li>
-            <li><a href="contact.html" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi seçənlər</a></li>
-            <li><a href="sosialmedya.html" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
-            <div>
-                <div class="hidden-buttons">
-                    <a href="xeber.html" style="color: rgb(235, 188, 68); text-decoration: none;">Xəbərlər</a>
-                </div>
-            </div>
-         
-        </ul>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    </nav>
+    <h1>ADMIN LOGIN</h1>
 
-<div style="display: flex ;"> 
-
-  <div style="width: 50%;">
-
-
-    <h1>Layihələri yüklə</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="photo" required>
-      <textarea name="description" placeholder="Açıklama"></textarea>
-      <button type="submit">Yüklə</button>
-    </form>
-    <h2>Yüklənən Fotolar</h2>
-    <div class="photo-container">
-      <% if (photos && photos.length > 0) { %>
-        <% photos.forEach(photo => { %>
-          <div class="photo-item">
-            <img src="data:image/jpeg;base64,<%= photo.image %>" alt="Fotoğraf">
-            <p><%= photo.description %></p>
-            <!-- Silme butonu için form -->
-            <form action="/delete-photo/<%= photo.id %>" method="POST">
-              <!-- method-override için _method parametresi -->
-              <input type="hidden" name="_method" value="DELETE">
-              <button type="submit">Sil</button>
+    <div style="display: flex; justify-content: space-between; padding: 20px;">
+        <!-- Fotoğraf Yükleme ve Listeleme -->
+        <div style="width: 48%;">
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="photo" required>
+                <input type="text" name="description" placeholder="Açıklama (Opsiyonel)">
+                <button type="submit">Yükle</button>
             </form>
-          </div>
-        <% }) %>
-      <% } else { %>
-        <p>Henüz fotoğraf yüklenmedi.</p>
-      <% } %>
+
+            <h2>Yüklenen Fotoğraflar</h2>
+            <div class="container">
+                <% if (photos.length > 0) { %>
+                    <div class="photo-grid">
+                        <% photos.forEach(photo => { %>
+                            <div class="photo">
+                                <img src="data:image/jpeg;base64,<%= photo.image %>" alt="Fotoğraf">
+                                <p><%= photo.description %></p>
+
+                                <!-- Fotoğraf Silme Butonu -->
+                                <form action="/delete-photo/<%= photo.id %>" method="POST">
+                                    <button type="submit" class="delete-btn">Sil</button>
+                                </form>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <p>Henüz fotoğraf yüklenmedi.</p>
+                <% } %>
+            </div>
+        </div>
+
+        <!-- Ekspert Add Butonu -->
+        <div >
+            <button style="background-color: #4CAF50; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
+                <a href="/expert/upload" style="color: white; text-decoration: none; font-size: 18px;">Ekspert Add</a>
+            </button>
+        </div>
+        <div>
+            <button style="background-color: #4CAF50; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
+                <a href="/expert/upload" style="color: white; text-decoration: none; font-size: 18px;">Ekspert Add</a>
+            </button>
+        </div>
+        
     </div>
-    
-  </div>
 
-
-
-
-  <div style="width: 50%;">
-    
-
-
-
-  
-  </div>
 </body>
 </html>

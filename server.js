@@ -8,7 +8,7 @@ const methodOverride = require('method-override');
 
 
 const app = express();
-const port = 80; // HTTP portu olarak 80'i kullanabilirsiniz. (ya da 443, HTTPS için)
+const port = 3000; // HTTP portu olarak 80'i kullanabilirsiniz. (ya da 443, HTTPS için)
 
 // PostgreSQL bağlantısı
 const client = new Client({
@@ -103,7 +103,7 @@ app.get('/upload', (req, res) => {
   });
 });
 // Fotoğraf silme işlemi - DELETE metodu ile
-app.delete('/delete-photo/:id', async (req, res) => {
+app.post('/delete-photo/:id', async (req, res) => {
   try {
     const result = await client.query('DELETE FROM photos WHERE id = $1', [req.params.id]);
     if (result.rowCount > 0) {
@@ -140,6 +140,161 @@ app.get('/photos', async (req, res) => {
     res.render('photos', { photos: [] }); // 📌 Hata olursa boş dizi gönderiyoruz.
   }
 });
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Ana sayfa (fotoğraf yükleme sayfası)
+app.get('/expert/upload', (req, res) => {
+  client.query('SELECT id, image, description FROM expert', (err, result) => {
+    if (err) {
+      console.error('Fotoğraflar alınamadı:', err);
+      return res.status(500).json({ success: false, message: 'Fotoğraflar alınamadı.' });
+    }
+
+    const photos = result.rows.map(row => ({
+      id: row.id,
+      image: row.image ? Buffer.from(row.image).toString('base64') : null,
+      description: row.description
+    }));
+
+    // Yüklenmiş fotoğrafları expert-upload.ejs şablonuna gönderiyoruz
+    res.render('expert-upload', { photos });
+  });
+});
+
+// Fotoğraf yükleme işlemi
+app.post('/expert/upload', upload.single('photo'), (req, res) => {
+  if (!req.file) return res.status(400).json({ success: false, message: 'Lütfen bir fotoğraf yükleyin.' });
+
+  const photoBuffer = req.file.buffer;
+  const description = req.body.description || '';
+
+  const query = 'INSERT INTO expert (image, description) VALUES ($1, $2) RETURNING id';
+  client.query(query, [photoBuffer, description], (err, result) => {
+    if (err) return res.status(500).json({ success: false, message: `Fotoğraf yüklenemedi: ${err.message}` });
+
+    res.redirect('/expert/upload');
+  });
+});
+
+// Fotoğraf silme işlemi
+app.post('/expert/delete-photo/:id', async (req, res) => {
+  try {
+    const result = await client.query('DELETE FROM expert WHERE id = $1', [req.params.id]);
+    if (result.rowCount > 0) {
+      res.redirect('/expert/upload');
+    } else {
+      res.status(404).json({ success: false, message: 'Fotoğraf bulunamadı!' });
+    }
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Fotoğraf silinemedi.' });
+  }
+});
+ 
+
+//listeleme
+
+app.get('/expert/photos', (req, res) => {
+  client.query('SELECT id, image, description FROM expert', (err, result) => {
+    if (err) {
+      console.error('Fotoğraflar alınamadı:', err);
+      return res.status(500).json({ success: false, message: 'Fotoğraflar alınamadı.' });
+    }
+
+    const photos = result.rows.map(row => ({
+      id: row.id,
+      image: row.image ? Buffer.from(row.image).toString('base64') : null,
+      description: row.description
+    }));
+
+    // Fotoğrafları expert-photos.ejs şablonuna gönderiyoruz
+    res.render('expert-photos', { photos });
+  });
+});
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Ana sayfa (fotoğraf yükleme sayfası)
+app.get('/secenler', (req, res) => {
+  client.query('SELECT id, image, description FROM secenler', (err, result) => {
+    if (err) {
+      console.error('Fotoğraflar alınamadı:', err);
+      return res.status(500).json({ success: false, message: 'Fotoğraflar alınamadı.' });
+    }
+
+    const photos = result.rows.map(row => ({
+      id: row.id,
+      image: row.image ? Buffer.from(row.image).toString('base64') : null,
+      description: row.description
+    }));
+
+    // Yüklenmiş fotoğrafları expert-upload.ejs şablonuna gönderiyoruz
+    res.render('expert-upload', { photos });
+  });
+});
+
+// Fotoğraf yükleme işlemi
+app.post('/expert/upload', upload.single('photo'), (req, res) => {
+  if (!req.file) return res.status(400).json({ success: false, message: 'Lütfen bir fotoğraf yükleyin.' });
+
+  const photoBuffer = req.file.buffer;
+  const description = req.body.description || '';
+
+  const query = 'INSERT INTO expert (image, description) VALUES ($1, $2) RETURNING id';
+  client.query(query, [photoBuffer, description], (err, result) => {
+    if (err) return res.status(500).json({ success: false, message: `Fotoğraf yüklenemedi: ${err.message}` });
+
+    res.redirect('/expert/upload');
+  });
+});
+
+// Fotoğraf silme işlemi
+app.post('/expert/delete-photo/:id', async (req, res) => {
+  try {
+    const result = await client.query('DELETE FROM expert WHERE id = $1', [req.params.id]);
+    if (result.rowCount > 0) {
+      res.redirect('/expert/upload');
+    } else {
+      res.status(404).json({ success: false, message: 'Fotoğraf bulunamadı!' });
+    }
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Fotoğraf silinemedi.' });
+  }
+});
+ 
+
+//listeleme
+
+app.get('/expert/photos', (req, res) => {
+  client.query('SELECT id, image, description FROM expert', (err, result) => {
+    if (err) {
+      console.error('Fotoğraflar alınamadı:', err);
+      return res.status(500).json({ success: false, message: 'Fotoğraflar alınamadı.' });
+    }
+
+    const photos = result.rows.map(row => ({
+      id: row.id,
+      image: row.image ? Buffer.from(row.image).toString('base64') : null,
+      description: row.description
+    }));
+
+    // Fotoğrafları expert-photos.ejs şablonuna gönderiyoruz
+    res.render('expert-photos', { photos });
+  });
+});
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 // Diğer sayfa yönlendirmeleri
 app.get('/expert', (req, res) => {
@@ -149,8 +304,17 @@ app.get('/expert', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about');
 });
+app.get('/telim', (req, res) => {
+  res.render('telim');
+});
+app.get('/secenler', (req, res) => {
+  res.render('secenler');
+});
+
+
+
 
 app.listen(port, () => {
   console.log(`Sunucu ${port} portunda çalışıyor...`);
-  console.log(`👉 Ana sayfayı aç: http://rodoos.az`);
+  console.log(`👉 Ana sayfayı aç: http://localhost:${port}`);
 });

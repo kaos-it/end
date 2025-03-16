@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotoğraf Yükle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            margin: 20px auto;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 15px auto;
+            width: 70%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .photo-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 16px;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Fotoğraf Yükleme Sayfası</h1>
+
+    <!-- Fotoğraf Yükleme Formu -->
+    <form action="/expert/upload" method="POST" enctype="multipart/form-data">
+        <label for="photo">Fotoğraf Yükleyin:</label>
+        <input type="file" name="photo" id="photo" required><br><br>
+
+        <textarea name="description" placeholder="Açıklama ekleyin" required></textarea><br><br>
+
+        <button type="submit">Yükle</button>
+    </form>
+
+    <h2>Yüklenen Fotoğraflar</h2>
+    <ul>
+        <% photos.forEach(photo => { %>
+            <li>
+                <img src="data:image/jpeg;base64,<%= photo.image %>" alt="Fotoğraf">
+                <p class="photo-description"><%= photo.description %></p>
+                <form action="/expert/delete-photo/<%= photo.id %>" method="POST">
+                    <button type="submit">Fotoğrafı Sil</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+
+    <a href="/expert/photos">Fotoğrafları Görüntüle</a>
+</body>
+</html>

@@ -1,121 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hakkında Sayfası</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-image: url('/images/background.jpg'); /* Public klasöründen çağır */
-      color: #000000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RODOOS</title>
+    <link rel="shortcut icon" href="/title.png" type="image/x-icon">
+    <link rel="icon" href="/title.png" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+          margin-top: 0;
+            height: 100vh;
+            background-attachment: fixed;
+            background-image: url('abstract-grey-and-gold-background-beauty-poster-with-dynamic-technology-network-illustration-vector.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .top-bar {
+    
+    top: 0;
+    left: 0;
+    width: 98%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000;
+    z-index: 1001;
+    height: 60px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.social-icons i {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+    background-color: rgb(235, 188, 68);
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: rgb(235, 188, 68);
+}
+
+.info a {
+    color: rgb(235, 188, 68);
+    text-decoration: none;
+}
+
+
+
+
+        .navbar {
+        position: sticky; /* Navbar'ı sayfa kaydırıldıkça sabit tutar */
+        top: 0; /* Sayfa en üstüne yerleştirir */
+        height: 90px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #cecece;
+        padding: 10px 20px;
+        z-index: 1000;
+        width: 98%;
+
+        }
+
+        .navbar:hover {
+            background-color:  #333333c1;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style-type: none;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            #imageContainer {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .hidden-buttons {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .nav-links li:hover .hidden-buttons {
+            display: block;
+            background-color: #333;
+            color: #EBCB44;
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 0s;
+            opacity: 1;
+        }
+
+        .hidden-buttons button {
+            background-color: #333;
+            color: #EBCB44;
+            border: 1px solid #EBCB44;
+            padding: 10px 15px;
+            margin: 5px 0;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .hidden-buttons button:hover {
+            background-color: #EBCB44;
+            color: #333;
+            transform: scale(1.05);
+        }
+
+        /* Sosyal medya panelinin stilini düzenliyoruz */
+.social-media-panel {
+    position: fixed; /* Sabit pozisyon */
+    bottom: 0; /* Ekranın alt kısmına sabitler */
+    left: 0; /* Sol taraftan başlatır */
+    width: 100%; /* Tam genişlik */
+    background-color: #333; /* Koyu arka plan */
+    padding: 10px 0;
+    z-index: 1000; /* Diğer içeriklerin önünde görünmesini sağlar */
+}
+        
+
+        .social-media-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+
+        .social-icon {
+            font-size: 40px;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+
+
+
+
+
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .prev, .next {
+        font-size: 1.5rem; /* Buton boyutunu küçült */
+        padding: 8px;
+    }
+    
+    #slider {
+        width: 100%;
+        height: auto;  /* Fotoğraf genişliği ekran genişliğine göre uyum sağlar */
+    }
+}
+
+@media (max-width: 480px) {
+    .prev, .next {
+        font-size: 1.2rem; /* Buton boyutunu daha da küçült */
+        padding: 5px;
     }
 
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-      animation: fadeInDown 1.2s ease-in-out;
+    #slider {
+        width: 100%;  /* Fotoğrafın genişliği ekranın tamamını kaplasın */
+        height: auto;  /* Yükseklik orantılı olarak ayarlandığı için genişlik değiştikçe yükseklik de değişir */
+    }
+}
+
+        .menu {
+    display: none; /* Menü başlangıçta gizli */
+    background-color: #333;
+    color: #000000;
+    padding: 10px;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu ul li {
+    margin: 10px 0;
+}
+
+.menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+  /* Butonun stilini ayarlıyoruz */
+  .intro-button {
+        background-color: rgb(235, 188, 68); /* Gold rengi */
+        color: white; /* Yazı rengi beyaz */
+        font-size: 18px;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animasyon için geçişler */
+      
     }
 
-    p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
-      animation: fadeIn 1.5s ease-in-out;
+    /* Hover (fare üzerine geldiğinde) efekti */
+    .intro-button:hover {
+        transform: scale(1.1); /* Buton büyüme animasyonu */
+        box-shadow: 0 0 15px rgba(235, 188, 68, 0.7); /* Altın rengi gölge ekliyoruz */
     }
 
-    .icons {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+    /* Butonun tıklanabilir olmasını sağlar */
+    .intro-button:active {
+        transform: scale(0.9); /* Buton tıklanırken küçülme animasyonu */
+    }
+    .photos-container {
+    display: flex;
+    flex-direction: column;  /* Varsayılan olarak fotoğraflar ve açıklamalar alt alta gelir */
+    gap: 20px;  /* Her bir fotoğraf ve açıklama bloğu arasında boşluk */
+    margin-top: 20px;
+}
+
+.photo-item {
+    display: flex;
+    justify-content: space-between;  /* Fotoğraf ve açıklama arasında boşluk bırakır */
+    align-items: center;
+    gap: 20px;  /* Fotoğraf ve açıklama arasındaki boşluk */
+}
+
+.photo-item img {
+    max-width: 100%;  /* Fotoğrafın genişliğini %100 yapar */
+    height: auto;  /* Yüksekliği orantılı şekilde ayarlar */
+    max-height: 300px;  /* Maksimum yükseklik, isteğe bağlı olarak ayarlanabilir */
+}
+
+/* Ekran genişliği 768px'den küçükse fotoğraf ve açıklamayı alt alta sıralar */
+@media (max-width: 768px) {
+    .photo-item {
+        flex-direction: column;  /* Fotoğraf ve açıklama alt alta sıralanır */
+        text-align: center;  /* Fotoğraf ve açıklama ortalanır */
     }
 
-    .icon-button {
-      font-size: 3rem;
-      background: #f9fafb;
-      color: #1e293b;
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+    .photo-item img {
+        max-width: 80%;  /* Fotoğrafın genişliğini %80 yapar */
     }
 
-    .icon-button:hover {
-      transform: scale(1.2);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    .photo-item p {
+        margin-top: 10px;  /* Açıklama ile fotoğraf arasına boşluk ekler */
     }
+}
 
-    .icon-button:focus {
-      outline: 2px solid #f9fafb;
-      outline-offset: 3px;
-    }
 
-    /* Linklerin altındaki mavi çizgiyi kaldırma */
-    a {
-      text-decoration: none;
-    }
 
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-  </style>
-
-  <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+        
+    </style>
 </head>
 <body>
-  <h1>Hakkımızda</h1>
-  <p>
-    Biz, yaratıcı çözümler sunan, teknoloji ve yeniliğe önem veren bir ekibiz. 
-    Misyonumuz, kullanıcılarımızın hayatlarını kolaylaştırmak ve değer katmaktır.
-  </p>
 
-  <div class="icons">
-    <% let socialLinks = [
-      { url: "https://wa.me/0514132500", icon: "fab fa-whatsapp", label: "WhatsApp" },
-      { url: "https://www.instagram.com/rafet.shiraliyev?igsh=MThvMDVmZHpkMXNwbQ==", icon: "fab fa-instagram", label: "Instagram" },
-      { url: "https://www.tiktok.com/@rafetshiraliyev?_t=ZS-8tOqc4YM2My&_r=1", icon: "fab fa-tiktok", label: "TikTok" },
-      { url: "https://www.facebook.com/share/15a8kuwdZi/?mibextid=wwXIfr", icon: "fab fa-facebook", label: "Facebook" }
-    ]; %>
+    <div class="top-bar">
+        <!-- Sosyal Medya İkonları -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/+994702712500" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        
 
-    <% socialLinks.forEach(link => { %>
-      <a href="<%= link.url %>" target="_blank" aria-label="<%= link.label %>">
-        <button class="icon-button">
-          <i class="<%= link.icon %>"></i>
-        </button>
-      </a>
-    <% }); %>
-  </div>
+        <!-- İletişim Bilgileri -->
+        <div class="info">
+            <a href="https://rodoos.az/">ÖDƏNİŞSİZ KONSULTASİYA ➜</a>
+            <span>📱 + (994-70) 271-25-00</span>
+            <span>📞 + (994-51) 413-25-00</span>
+            <a href="mailto:info@rodoos.az">✉ info@rodoos.az</a>
+        </div>
+
+        <!-- Dil Seçenekleri -->
+       
+    </div>
+
+
+
+
+
+    
+   <!-- Navbar -->
+   <nav class="navbar">
+    <a href="#" class="logo">
+        <!-- Logo resmini buraya ekliyoruz -->
+        <img src="/Rodoos.png" alt="RODOOS Logo" style="max-height: 50px;">
+    </a>
+    
+    <ul class="nav-links">
+        <li><a href="/photos" class="next-button" style="color: rgb(235, 188, 68); text-decoration: none;">Əsas səyfə</a></li>
+        <li><a href="" style="color: rgb(235, 188, 68); text-decoration: none;">Biz kimik?</a>
+            <div class="hidden-buttons">
+                <button><a href="/haqqımızda" style="color: rgb(235, 188, 68); text-decoration: none;">Haqqımzıda</a></button>
+                <button><a href="/deyerlerımız" style="color: rgb(235, 188, 68); text-decoration: none;">Dəyərlərimiz</a></button>
+                <button><a href="/misya" style="color: rgb(235, 188, 68); text-decoration: none;">Misiya & Vizyonumuz</a></button>
+            </div>
+        </li>
+        <li><a href="#about" style="color: rgb(235, 188, 68); text-decoration: none;">Xidmətlərimiz</a>
+            <div class="hidden-buttons">
+                <button><a href="/telim" style="color: rgb(235, 188, 68); text-decoration: none;">Təlim</a></button>
+                <button><a href="/expert/photos" style="color: rgb(235, 188, 68); text-decoration: none;">Ekspertlərimiz</a></button>
+                <button><a href="/araşdırma" style="color: rgb(235, 188, 68); text-decoration: none;">Araşdırma</a></button>
+            </div>
+        </li>
+       
+        <li><a href="/secenler" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi seçənlər</a></li>
+        <li><a href="/about" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
+        <div>
+          
+        </div>
+     
+    </ul>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</nav>
+
+
+
+
+    <div class="social-media-panel">
+        <div class="social-media-links">
+            <a href="https://www.instagram.com/rodoosllc?igsh=Y3p4dXg2cGVkdHM5" target="_blank" class="social-link">
+                <i class="fab fa-instagram social-icon"></i> Instagram
+            </a>
+            <a href="http://Www.Linkedin.com/company/rodoosllc" target="_blank" class="social-link">
+                <i class="fab fa-linkedin social-icon"></i> LinkedIn
+            </a>
+            <a href="https://wa.me/+994702712500" target="_blank" class="social-link">
+                <i class="fab fa-whatsapp social-icon"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+   
+
+
+    
+    </div>
+
+    <script>
+    
+
+
+
+            // Sayfa kaydırıldıkça navbar'ın stilini değiştirebiliriz
+    window.onscroll = function() {
+        var navbar = document.querySelector(".navbar");
+        if (window.scrollY > 100) {
+            navbar.style.backgroundColor = "#333";  // Scroll sonrası navbar'ın rengini değiştirebilirsiniz
+        } else {
+            navbar.style.backgroundColor = "#cecece";  // Sayfa başına dönünce eski renge geri döner
+        }
+    };
+  
+
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+    </script>
+
+    </script>
 </body>
 </html>

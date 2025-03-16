@@ -16,7 +16,7 @@
           margin-top: 0;
             height: 100vh;
             background-attachment: fixed;
-            background-image: url('abstract-grey-and-gold-background-beauty-poster-with-dynamic-technology-network-illustration-vector.jpg');
+            background-color: #9f9f9f;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -72,50 +72,6 @@
 .info a {
     color: rgb(235, 188, 68);
     text-decoration: none;
-}
-
-
-#imageContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
-}
-
-.image-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffffff00;
-    
-    padding: 0px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.image-item img {
-    width: 80%; /* Border'ı %90 kaplaması için genişlik */
-    max-height: 300px; /* Maksimum yükseklik 300px */
-    border-radius: 5px;
-    object-fit: cover; /* Fotoğrafın tüm alanı kaplamasını sağlıyoruz */
-}
-
-.image-caption {
-    margin-top: 10px;
-    text-align: center;
-    color: #333;
-    max-height: 150px;
-    overflow: auto;
-}
-
-@media (max-width: 768px) {
-    #imageContainer {
-        grid-template-columns: 1fr; /* Mobilde her fotoğraf 1 sütun olacak */
-    }
-
-    .image-item {
-        margin: 10px 0;
-    }
 }
 
 
@@ -218,15 +174,17 @@
             transform: scale(1.05);
         }
 
-        .social-media-panel {
-            width: 100%;
-            background-color: #333;
-            padding: 20px 0;
-            text-align: center;
-            margin-bottom: 0;
-            left: 0;
-            bottom: 0;
-        }
+        /* Sosyal medya panelinin stilini düzenliyoruz */
+.social-media-panel {
+    position: fixed; /* Sabit pozisyon */
+    bottom: 0; /* Ekranın alt kısmına sabitler */
+    left: 0; /* Sol taraftan başlatır */
+    width: 100%; /* Tam genişlik */
+    background-color: #333; /* Koyu arka plan */
+    padding: 10px 0;
+    z-index: 1000; /* Diğer içeriklerin önünde görünmesini sağlar */
+}
+        
 
         .social-media-links {
             display: flex;
@@ -249,127 +207,11 @@
             transform: scale(1.1);
         }
 
-        /*Password and email   popup */
-        #passwordPage {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            z-index: 1001;
-        }
 
-        #passwordPage input, #passwordPage button {
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 16px;
-        }
 
-        #passwordPage button {
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-        }
 
-        #passwordPage button:hover {
-            background-color: #EBCB44;
-        }
-         /* Modal ve İçeriği */
-.modal {
-    display: none;  /* Başlangıçta gizli */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Karartma */
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-}
 
-/* Modal İçeriği */
-.modal-content {
-    position: relative;
-    background-color: white;
-    padding: 20px;
-    max-width: 80%;
-    max-height: 80%;
-    margin: auto;
-    border-radius: 10px;
-}
 
-/* Kapatma Butonu */
-.exit-button {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.exit-button:hover {
-    background-color: #e53935;
-}
-
-/* Kapatma ikonunun konumu */
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 30px;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.close-button:hover {
-    color: #000;
-}
-/* Slider container */
-.slider-container {
-    position: relative;
-    width: 100%;
-    max-width: 100%;  /* Ekran genişliğine göre uyum sağlar */
-    margin: auto;
-    overflow: hidden; /* Fotoğraf dışarı taşmasın */
-}
-
-/* Slider image */
-#slider {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: opacity 0.5s ease-in-out; /* Animasyon için geçiş efekti */
-    object-fit: cover; /* Fotoğrafın orantılı bir şekilde doldurulmasını sağlar */
-}
-
-/* Next/Previous buttons */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1;
-}
 
 .prev {
     left: 10px;
@@ -448,19 +290,76 @@
     .intro-button:active {
         transform: scale(0.9); /* Buton tıklanırken küçülme animasyonu */
     }
-    .down-button {
-  background-color: #808080; /* Boz renk */
-  border: none;
-  border-radius: 450px; /* Dairesel şekil */
-  color:  rgb(235, 188, 68);
-  font-size: 45px; /* Ok simgesinin boyutu */
-  padding: 20px; /* Butonun büyüklüğü */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+
+
+
+/* Fotoğraf stilini ayarlıyoruz */
+.photo-item img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;  /* Tıklanabilir hale getiriyoruz */
+    
+}
+.photo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
 }
 
-.down-button:hover {
-  background-color: #494949; /* Hover durumunda biraz daha koyu boz renk */
+.photo-item div {
+    width: 50%; /* Her iki öğe de ekranın yarısını alır */
+    overflow: hidden; /* İçerik taşarsa gizler */
+}
+
+.photo-item p {
+    max-height: 200px;/* Yazıların yüksekliğini sınırlandırır */
+    overflow-y: auto;   /* Yükseklik sınırını aşan metinlerde dikey kaydırma çubuğu ekler */
+    white-space: normal; /* Yazının satırlara bölünmesini sağlar */
+    cursor: ns-resize;  /* Dikey kaydırma çubuğu olduğunda el simgesi ekler */
+}
+
+
+/* Modal (Büyütülmüş Fotoğraf) */
+.modal {
+    display: none;  /* Başlangıçta gizli */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);  /* Koyu arka plan */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+/* Bağla butonu (Modal kapanış butonu) */
+.close {
+    position: absolute;
+    bottom: 20px;
+    right: 50%;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 9x;
+    transition: background-color 0.3s;
+}
+
+.close:hover {
+    background-color: rgba(69, 0, 0, 0.7);
 }
 
         
@@ -530,7 +429,7 @@
         <li><a href="/secenler" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi seçənlər</a></li>
         <li><a href="/about" style="color: rgb(235, 188, 68); text-decoration: none;">Bizi izlə</a></li>
         <div>
-            <li><a href="#" class="next-button" style="text-decoration: none; color: #545252;" onclick="showPasswordPage()">LOGIN ADMIN</a></li>
+           
         </div>
      
     </ul>
@@ -538,61 +437,7 @@
 </nav>
 
 
-    <!-- haraketli foto-->
 
-    <div class="slider-container">
-        <button class="prev" onclick="prevPhoto()">❮</button>
-        <img id="slider" src="haraket5.jpg" alt="RODOOS.AZ" >
-        <button class="next" onclick="nextPhoto()">❯</button>
-    </div> 
-    
-<br>
-<br>
-    <div style="display: flex; justify-content: space-around;gap: 0; ">
-        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
-        <div style="width: 300px;background-color: rgb(0, 110, 206) ; height: 4px;"></div>
-        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
-    </div>
-    <center><div><h2 style="color: rgb(235, 188, 68);">Layihələrimiz</h2></div></center>
-
-    <!-- Password and Email Popup -->
-    <div id="passwordPage">
-        <input type="password" id="password" placeholder="Enter password">
-        <input type="email" id="email" placeholder="Enter email ()">
-        <button onclick="checkPassword()">Submit</button>
-    </div>
-
-    <div id="imageContainer">
-        <% photos.forEach(photo => { %>
-            <div class="image-item">
-                <img src="data:image/jpeg;base64,<%= photo.image %>" alt="Fotoğraf" width="300">
-                <p class="image-caption"><%= photo.description %></p>
-            </div>
-        <% }) %>
-    </div>
-    <div style="display: flex; justify-content: space-around;gap: 0; ">
-        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
-        <div style="width: 500px;background-color: rgb(0, 110, 206) ; height: 4px;"></div>
-        <div style="width: 600px;background-color: rgb(235, 188, 68) ; height: 3px;"></div>
-    </div>
-<br><br>
-
-<p style="color:  rgb(58, 41, 0); font-size: 20px;">Rodoos, müxtəlif sahələrdə təcrübəyə və biliklərə sahib olan mütəxəssislərlə çalışır. Bizim ekspertlər müxtəlif sənaye sahələrindəki dərin bilik və təcrübələri ilə sizə ən yaxşı xidmətləri təqdim edir. Hər bir mütəxəssis öz sahəsindəki ən son yeniliklərdən xəbərdardır və peşəkar yanaşma ilə layihələrə dəyər qatır. Bizim məqsədimiz, müştərilərimizə yüksək keyfiyyətli və etibarlı xidmətlər təqdim etməkdir.</p>
-
-
-
-    <center>
-    
-        <button class="intro-button"><a href="/expert/photos" style="  text-decoration: none;">Expertlərimizlə tanışlıq</a></button>
-    </center>
-    
-    <div>
-        <a href="/secenler-upload">
-            <button class="down-button">&#8595;</button>
-          </a>
-          
-    </div>
-   
 
     <div class="social-media-panel">
         <div class="social-media-links">
@@ -607,12 +452,28 @@
             </a>
         </div>
     </div>
-    <div id="myModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img id="modalImage" src="" alt="Büyütülmüş Fotoğraf">
-        <button class="exit-button" onclick="closeModal()">Bağla</button>
-    </div>
+   
 
+    <div class="photos-container">
+        <% photos.forEach(photo => { %>
+            <div class="photo-item">
+                <div style="width: 50%;"> <!-- Fotoğraf için bir kapsayıcı -->
+                    <img src="data:image/jpeg;base64,<%= photo.image %>" alt="Fotoğraf" onclick="openModal(this)">
+                </div>
+                <div style="width: 50%;"> <!-- Açıklama için bir kapsayıcı -->
+                    <p><%= photo.description %></p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    
+    <!-- Modal (Büyütülmüş Fotoğrafı Gösterme Alanı) -->
+    <div id="modal" class="modal">
+        <span class="close" onclick="closeModal()">Bağla</span>
+        <img class="modal-content" id="modal-img" src="">
+    </div>
+    
+    </div>
 
     <script>
     
@@ -628,93 +489,27 @@
             navbar.style.backgroundColor = "#cecece";  // Sayfa başına dönünce eski renge geri döner
         }
     };
-        function showPasswordPage() {
-            document.getElementById('passwordPage').style.display = 'block';
-        }
+  
 
-        function checkPassword() {
-            const enteredPassword = document.getElementById('password').value;
-            const enteredEmail = document.getElementById('email').value;
-            const correctPassword = '12345';
-            const correctEmail = 'rodoosllc@gmail.com';
-
-            if (enteredPassword === correctPassword && enteredEmail === correctEmail) {
-                window.location.href = "/upload";
-            } else {
-                alert('Incorrect password or email');
-                document.getElementById('password').value = '';
-                document.getElementById('email').value = '';
-            }
-        }
 
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('active');
         }
-    
-        // Fotoğrafa tıklanarak modalde büyütülmesi için
-        document.querySelectorAll('.image-item img').forEach(img => {
-            img.addEventListener('click', function() {
-                var modal = document.getElementById('myModal');
-                var modalImg = document.getElementById('modalImage');
-                modal.style.display = "flex";
-                modalImg.src = this.src; // Tıklanan fotoğrafı modalde göster
-            });
-        });
-// Modalı gösterme fonksiyonu
-function showModal() {
-    document.getElementById('modal').style.display = 'flex';
+        // Fotoğrafı büyütmek için modali açma fonksiyonu
+function openModal(img) {
+    var modal = document.getElementById("modal");
+    var modalImg = document.getElementById("modal-img");
+    modal.style.display = "flex";  // Modal'ı göster
+    modalImg.src = img.src;  // Büyütülmüş fotoğrafı göster
 }
 
-// Modalı kapatma fonksiyonu
+// Modalı kapatmak için "Bağla" butonuna tıklandığında çağrılacak fonksiyon
 function closeModal() {
-    document.getElementById('modal').style.display = 'none';
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";  // Modal'ı gizle
 }
 
-        // Fotoğrafa tıklanarak modalde büyütülmesi için
-        document.querySelectorAll('.image-item img').forEach(img => {
-            img.addEventListener('click', function() {
-                var modal = document.getElementById('myModal');
-                var modalImg = document.getElementById('modalImage');
-                modal.style.display = "flex";
-                modalImg.src = this.src; // Tıklanan fotoğrafı modalde göster
-            });
-        });
-
-        // Modalı kapatmak için
-        function closeModal() {
-            var modal = document.getElementById('myModal');
-            modal.style.display = "none";
-        }
-        const photos = [
-            'haraket1.png',  // Fotoğraf yollarını buraya ekleyebilirsin
-            'haraket2.png',
-            'haraket3.png',
-            'haraket4.jpg'
-        ];
-
-        let index = 0;
-        const imgElement = document.getElementById('slider');
-
-        function updatePhoto() {
-            imgElement.style.opacity = 0;
-            setTimeout(() => {
-                imgElement.src = photos[index];
-                imgElement.style.opacity = 1;
-            }, 300);
-        }
-
-        function nextPhoto() {
-            index = (index + 1) % photos.length;
-            updatePhoto();
-        }
-
-        function prevPhoto() {
-            index = (index - 1 + photos.length) % photos.length;
-            updatePhoto();
-        }
-
-        setInterval(nextPhoto, 6000); // Otomatik geçiş
 
     </script>
 

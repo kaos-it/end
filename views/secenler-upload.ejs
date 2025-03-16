@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fotoğraf Yükle</title>
+</head>
+<body>
+  <h1>Fotoğraf ve Açıklama Yükle</h1>
+  
+  <form action="/secenler" method="POST" enctype="multipart/form-data">
+    <label for="photo">Fotoğraf Seç:</label>
+    <input type="file" name="photo" id="photo" required><br><br>
+
+    <label for="description">Açıklama:</label><br>
+    <textarea name="description" id="description" required></textarea><br><br>
+
+    <button type="submit">Yükle</button>
+  </form>
+  
+</body>
+</html>
