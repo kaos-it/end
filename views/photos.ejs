@@ -502,6 +502,45 @@
 .down-button:hover {
   background-color: #494949; /* Hover durumunda biraz daha koyu boz renk */
 }
+.modal {
+    display: none;  /* Başlangıçta gizli */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.ad-button {
+    background-color: rgb(235, 188, 68);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    
+}
+
 
         
     </style>
@@ -577,6 +616,26 @@
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 </nav>
 
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<div id="adModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeAdModal()">&times;</span>
+        <img src="itkurslar.png" alt="Reklam" style="max-width: 100%;">
+        <p>Bu reklama tıklayarak daha fazla bilgi edinin!</p>
+        <a href="https://orneklink.com" target="_blank">
+            <button class="ad-button"><a href="https://www.instagram.com/rodoos.edu.az/" style="text-decoration: none;">Daha Fazla</a></button>
+        </a>
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="kurs.png" alt="Büyütülmüş Fotoğraf">
+    <button class="exit-button" onclick="closeModal()">Bağla</button>
+</div>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
 
     <!-- haraketli foto-->
 
@@ -647,15 +706,22 @@
             </a>
         </div>
     </div>
-    <div id="myModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img id="modalImage" src="" alt="Büyütülmüş Fotoğraf">
-        <button class="exit-button" onclick="closeModal()">Bağla</button>
-    </div>
 
 
     <script>
-    
+    function openAdModal() {
+    document.getElementById("adModal").style.display = "flex";
+}
+
+function closeAdModal() {
+    document.getElementById("adModal").style.display = "none";
+}
+
+// Sayfa yüklendiğinde 7 saniye sonra aç
+window.onload = function() {
+    setTimeout(openAdModal, 7000);
+};
+
 
 
 
